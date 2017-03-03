@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +10,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' # Tells the system that the sqlite database is at the root folder at the project. This sqlite can also be MySQL etc.
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db') # Tells the system that the sqlite database is at the root folder at the project. This sqlite can also be MySQL etc.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Tells the Flask sqlalchemy tracker not to track, because SQLAlchemy itself has its own tracker. This line is just to save some cpu.
 app.secret_key = 'jose'
 api = Api(app)
