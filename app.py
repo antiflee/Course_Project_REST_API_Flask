@@ -13,10 +13,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Tells the Flask sqlalchem
 app.secret_key = 'jose'
 api = Api(app)
 
-# Flask decorator: run the method before the first request to the app
-@app.before_first_request
-def create_tables():    # Create tables.
-    db.create_all()
+
 
 # JWT is used to facilitate authentication method.
 jwt = JWT(app, authenticate, identity) # /auth will be created by JWT autimatically.
